@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:alpine
+    container_name: redis-container
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:6379:6379"
+    environment:
+      REDIS_PASSWORD: password
+      REDIS_USER: admin
+      REDIS_USER_PASSWORD: password
+    command: redis-server --requirepass password
+    volumes:
+      - redis_data:/data
+    networks:
+      - app_network
+
+volumes:
+  redis_data:
+    driver: local
+networks:
+  app_network:
+    driver: bridge

@@ -1,0 +1,41 @@
+name: deploy
+
+on:
+  push:
+    branches: [ 'redis-prod' ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+#      - name: Create .env file from secrets
+#        run: |
+#          echo "PORT=${{ secrets.PORT }}" >> .env
+#          echo "MONGO_DB_URL=${{ secrets.MONGO_DB_URL }}" >> .env
+#          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+#          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+#          echo "REDIS_URL=${{ secrets.REDIS_URL }}" >> .env
+      - name: Build Redis
+        run: docker-compose build
+
+      - name: Stop and remove old Redis container
+        run: |
+          docker stop redis-container || true
+          docker rm redis-container || true
+
+      - name: Deploy new redis container
+        run: docker-compose up -d
+
+      - name: Clean up unused images
+        run: docker image prune -f
+
+      - name: Verify deployment
+        run: |
+          echo "=== Deployment Status ==="
+          docker ps --filter "name=my-microservice"
+          echo ""
+          echo "=== Service Logs (last 5 lines) ==="
+          docker-compose logs --tail=5
