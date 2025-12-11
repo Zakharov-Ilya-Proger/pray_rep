@@ -8,6 +8,10 @@ jobs:
   deploy:
     runs-on: self-hosted
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -38,4 +42,4 @@ jobs:
           docker ps --filter "name=my-microservice"
           echo ""
           echo "=== Service Logs (last 5 lines) ==="
-          docker-compose logs --tail=5
+          docker compose logs --tail=5
