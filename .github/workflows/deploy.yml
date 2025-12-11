@@ -19,7 +19,7 @@ jobs:
 #          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
 #          echo "REDIS_URL=${{ secrets.REDIS_URL }}" >> .env
       - name: Build Redis
-        run: docker-compose build
+        run: docker compose build
 
       - name: Stop and remove old Redis container
         run: |
@@ -27,7 +27,7 @@ jobs:
           docker rm redis-container || true
 
       - name: Deploy new redis container
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: Clean up unused images
         run: docker image prune -f
