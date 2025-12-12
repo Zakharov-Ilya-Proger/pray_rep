@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: api-microservice
+    ports:
+      - "127.0.0.1:3004:3004"
+    environment:
+      - PORT=${PORT}
+      - MONGO_DB_URL=${MONGO_DB_URL}
+      - DB_NAME=${DB_NAME}
+      - JWT_SECRET=${JWT_SECRET}
+      - REDIS_URL=${REDIS_URL}
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - db_app_network
+
+networks:
+  db_app_network:
+    external: true
