@@ -2,7 +2,7 @@ name: deploy
 
 on:
   push:
-    branches: [ 'redis-prod' ]
+    branches: [ 'api-prod' ]
 
 jobs:
   deploy:
