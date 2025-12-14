@@ -1,4 +1,12 @@
-FROM ubuntu:latest
-LABEL authors="User"
+FROM python:3.12-slim
 
-ENTRYPOINT ["top", "-b"]
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 3004
+
+CMD ["uvicorn", "api.api:api", "--host", "0.0.0.0", "--port", "3004", "--workers", "1"]

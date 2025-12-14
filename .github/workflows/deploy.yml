@@ -1,0 +1,44 @@
+name: deploy
+
+on:
+  push:
+    branches: [ 'redis-prod' ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Create .env file from secrets
+        run: |
+          echo "PORT=${{ secrets.PORT }}" >> .env
+          echo "REDIS=${{ secrets.REDIS }}" >> .env
+          echo "WORKERS=${{ secrets.WORKERS }}" >> .env
+          echo "QUEUE_KEY=${{ secrets.QUEUE_KEY }}" >> .env
+      - name: Build Redis
+        run: docker compose build
+
+      - name: Stop and remove old API container
+        run: |
+          docker stop api-container || true
+          docker rm api-container || true
+
+      - name: Deploy new redis container
+        run: docker compose up -d
+
+      - name: Clean up unused images
+        run: docker image prune -f
+
+      - name: Verify deployment
+        run: |
+          echo "=== Deployment Status ==="
+          docker ps --filter "name=my-microservice"
+          echo ""
+          echo "=== Service Logs (last 5 lines) ==="
+          docker compose logs --tail=5

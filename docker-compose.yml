@@ -7,17 +7,15 @@ services:
     ports:
       - "127.0.0.1:3004:3004"
     environment:
-      - PORT=${PORT}
-      - MONGO_DB_URL=${MONGO_DB_URL}
-      - DB_NAME=${DB_NAME}
-      - JWT_SECRET=${JWT_SECRET}
-      - REDIS_URL=${REDIS_URL}
+      - REDIS=${REDIS}
+      - WORKERS=${WORKERS}
+      - QUEUE_KEY=${QUEUE_KEY}
     env_file:
       - .env
     restart: unless-stopped
     networks:
-      - db_app_network
+      - pray_rep_app_network
 
 networks:
-  db_app_network:
+  pray_rep_app_network:
     external: true
