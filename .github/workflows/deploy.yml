@@ -1,0 +1,50 @@
+name: deploy
+
+on:
+  push:
+    branches: [ 'worker-prod' ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Create .env file from secrets
+        run: |
+          echo "REDIS_URL=${{ secrets.REDIS_URL }}" >> .env
+          echo "QUEUE_KEY=${{ secrets.QUEUE_KEY }}" >> .env
+          echo "PROCESSING_KEY=${{ secrets.PROCESSING_KEY }}" >> .env
+          echo "DLQ_KEY=${{ secrets.DLQ_KEY }}" >> .env
+          echo "BLOCK_SEC=${{ secrets.BLOCK_SEC }}" >> .env
+          echo "MAX_ATTEMPTS=${{ secrets.MAX_ATTEMPTS }}" >> .env
+          echo "ATTEMPTS_HASH=${{ secrets.ATTEMPTS_HASH }}" >> .env
+          echo "REQUEUE_ON_START=${{ secrets.REQUEUE_ON_START }}" >> .env
+          echo "MODEL_PATH=${{ secrets.MODEL_PATH }}" >> .env
+          echo "SAMPLE_RATE=${{ secrets.SAMPLE_RATE }}" >> .env
+      - name: Build Redis
+        run: docker compose build
+
+      - name: Stop and remove old API container
+        run: |
+          docker stop api-container || true
+          docker rm api-container || true
+
+      - name: Deploy new redis container
+        run: docker compose up -d
+
+      - name: Clean up unused images
+        run: docker image prune -f
+
+      - name: Verify deployment
+        run: |
+          echo "=== Deployment Status ==="
+          docker ps --filter "name=my-microservice"
+          echo ""
+          echo "=== Service Logs (last 5 lines) ==="
+          docker compose logs --tail=5
