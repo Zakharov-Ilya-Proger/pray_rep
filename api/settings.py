@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     REDIS: str = getenv("REDIS")
     WORKERS: int = getenv("WORKERS")
     QUEUE_KEY: str = getenv("QUEUE_KEY")
+    PORT: int = getenv("PORT")
 
     class Config:
         env_file = ".env"

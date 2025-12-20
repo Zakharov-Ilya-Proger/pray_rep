@@ -1,5 +1,7 @@
 from fastapi import APIRouter, HTTPException
-from api import reqModel, post_to_redis
+
+from api.models.reqModel import reqModel
+from api.redis_funcs.post_to_redis import post_to_redis
 
 router = APIRouter(
     tags=['Post Audio'],
