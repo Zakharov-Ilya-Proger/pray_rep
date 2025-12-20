@@ -3,7 +3,8 @@ import json
 from fastapi import HTTPException
 from redis import RedisError
 
-from api import redis_client, settings
+from api import settings
+from api.redis_client import redis_client
 
 
 async def post_to_redis(data):

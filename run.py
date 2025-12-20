@@ -1,6 +1,6 @@
 from uvicorn import run
 from api import api
-from api import settings
+from api.settings import settings
 
 if __name__ == '__main__':
     run(

@@ -1,11 +1,10 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-from redis.asyncio import Redis
 
-from api import router, settings
+from api.redis_client import redis_client
+from api.routers import router
+from api.settings import settings
 
-
-redis_client: Redis | None = None
 
 api = FastAPI()
 
@@ -17,8 +16,7 @@ api.add_middleware(
 
 @api.on_event("startup")
 async def startup():
-    global redis_client
-    redis_client = Redis.from_url(settings.REDIS, decode_responses=True)
+    redis_client.from_url(settings.REDIS, decode_responses=True)
 
 
 @api.on_event("shutdown")
