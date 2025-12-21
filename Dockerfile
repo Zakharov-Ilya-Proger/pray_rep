@@ -5,10 +5,10 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN apk add --no-cache \
-    ffmpeg \
-    libavc1394 \
-    tini
+RUN apt-get update \
+    && apt-get install -y ffmpeg \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY . .
 
