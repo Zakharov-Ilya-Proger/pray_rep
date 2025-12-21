@@ -28,7 +28,7 @@ jobs:
           echo "MODEL_PATH=${{ secrets.MODEL_PATH }}" >> .env
           echo "SAMPLE_RATE=${{ secrets.SAMPLE_RATE }}" >> .env
       - name: Build worker
-        run: docker compose build
+        run: docker compose -p pray_worker build
 
       - name: Stop and remove old API container
         run: |
@@ -36,7 +36,7 @@ jobs:
           docker rm worker-container || true
 
       - name: Deploy new redis container
-        run: docker compose up -d
+        run: docker compose -p pray_worker up -d
 
       - name: Clean up unused images
         run: docker image prune -f
