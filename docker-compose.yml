@@ -11,9 +11,17 @@ services:
     ports:
       - "127.0.0.1:3005:3005"
     environment:
-      - REDIS=${REDIS}
       - WORKERS=${WORKERS}
       - QUEUE_KEY=${QUEUE_KEY}
+      - REDIS_URL=${REDIS_URL}
+      - PROCESSING_KEY=${PROCESSING_KEY }
+      - DLQ_KEY=${DLQ_KEY }
+      - BLOCK_SEC=${BLOCK_SEC }
+      - MAX_ATTEMPTS=${MAX_ATTEMPTS }
+      - ATTEMPTS_HASH=${ATTEMPTS_HASH }
+      - REQUEUE_ON_START=${REQUEUE_ON_START }
+      - MODEL_PATH=${MODEL_PATH }
+      - SAMPLE_RATE=${SAMPLE_RATE }
     env_file:
       - .env
     restart: unless-stopped

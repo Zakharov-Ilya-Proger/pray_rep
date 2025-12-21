@@ -3,7 +3,7 @@ import time
 import signal
 import redis
 
-from worker import process_record
+from worker.tasks import process
 
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 
@@ -61,7 +61,7 @@ while not stop:
             continue
 
         try:
-            process_record(record_id)
+            process(record_id)
             ack(record_id)
         except Exception as e:
             fail_and_requeue(record_id, str(e))
