@@ -1,1 +1,1 @@
-from worker.settings import settings
+from settings import settings
