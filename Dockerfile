@@ -14,4 +14,4 @@ COPY . .
 
 EXPOSE 3005
 
-CMD ["python", "worker/worker.py"]
+CMD ["python", "worker.py"]
