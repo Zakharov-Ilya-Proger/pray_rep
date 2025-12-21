@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      network: host
+    container_name: worker-container
+    ports:
+      - "127.0.0.1:3005:3005"
+    environment:
+      - REDIS=${REDIS}
+      - WORKERS=${WORKERS}
+      - QUEUE_KEY=${QUEUE_KEY}
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - pray_rep_app_network
+
+networks:
+  pray_rep_app_network:
+    external: true
