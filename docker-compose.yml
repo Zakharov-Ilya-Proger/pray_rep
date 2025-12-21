@@ -5,6 +5,8 @@ services:
     build:
       context: .
       network: host
+    volumes:
+      - /home/runner/vosk-model-ru-0.42:/models/vosk-model-ru-0.42:ro
     container_name: worker-container
     ports:
       - "127.0.0.1:3005:3005"
