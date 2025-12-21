@@ -1,5 +1,5 @@
-from api import download_mp3, post_data
-from model import transcribe_with_vosk
+from worker.api import download_mp3, post_data
+from worker.model import transcribe_with_vosk
 from os import path, remove
 
 

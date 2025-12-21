@@ -3,7 +3,7 @@ import time
 import signal
 import redis
 
-from tasks import process
+from worker.tasks import process
 
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 

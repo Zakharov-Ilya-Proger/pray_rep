@@ -2,7 +2,7 @@ import json
 import subprocess
 
 from worker import settings
-from worker.model import rec
+from worker.model.init_model import rec
 
 
 def transcribe_with_vosk(mp3_path: str) -> str:
