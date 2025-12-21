@@ -26,8 +26,8 @@ jobs:
 
       - name: Stop and remove old API container
         run: |
-          docker stop api-container || true
-          docker rm api-container || true
+          docker stop api-microservice || true
+          docker rm api-microservice || true
 
       - name: Deploy new redis container
         run: docker compose up -d
