@@ -22,7 +22,7 @@ jobs:
           echo "WORKERS=${{ secrets.WORKERS }}" >> .env
           echo "QUEUE_KEY=${{ secrets.QUEUE_KEY }}" >> .env
       - name: Build Redis
-        run: docker compose build
+        run: docker compose -p pray_api build
 
       - name: Stop and remove old API container
         run: |
@@ -30,7 +30,7 @@ jobs:
           docker rm api-microservice || true
 
       - name: Deploy new redis container
-        run: docker compose up -d
+        run: docker compose -p pray_api up -d
 
       - name: Clean up unused images
         run: docker image prune -f
