@@ -27,13 +27,13 @@ jobs:
           echo "REQUEUE_ON_START=${{ secrets.REQUEUE_ON_START }}" >> .env
           echo "MODEL_PATH=${{ secrets.MODEL_PATH }}" >> .env
           echo "SAMPLE_RATE=${{ secrets.SAMPLE_RATE }}" >> .env
-      - name: Build Redis
+      - name: Build worker
         run: docker compose build
 
       - name: Stop and remove old API container
         run: |
-          docker stop api-container || true
-          docker rm api-container || true
+          docker stop worker-container || true
+          docker rm worker-container || true
 
       - name: Deploy new redis container
         run: docker compose up -d
