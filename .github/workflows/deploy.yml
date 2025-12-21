@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Create .env file from secrets
         run: |
-          echo "REDIS_URL=${{ secrets.REDIS_URL }}" >> .env
+          echo "REDIS_URL=${{ secrets.REDIS }}" >> .env
           echo "QUEUE_KEY=${{ secrets.QUEUE_KEY }}" >> .env
           echo "PROCESSING_KEY=${{ secrets.PROCESSING_KEY }}" >> .env
           echo "DLQ_KEY=${{ secrets.DLQ_KEY }}" >> .env
