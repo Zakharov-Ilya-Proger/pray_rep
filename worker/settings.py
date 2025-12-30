@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     MODEL_PATH: str = getenv("MODEL_PATH")
     SAMPLE_RATE: int = getenv("SAMPLE_RATE", 16000)
 
+    API_RECORD_PASS: str = getenv("API_RECORD_PASS", "0")
+    API_RECORD_URL: str = getenv("API_RECORD_URL", "0")
+
     class Config:
         env_file = ".env"
 

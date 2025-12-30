@@ -9,10 +9,13 @@ def transcribe_with_vosk(mp3_path: str) -> str:
     cmd = [
         "ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error",
         "-i", mp3_path,
+        "-vn",
+        "-map", "0:a:0",
+        "-acodec", "pcm_s16le",
         "-ar", str(settings.SAMPLE_RATE),
         "-ac", "1",
         "-f", "s16le",
-        "-"
+        "pipe:1"
     ]
 
     rec.SetWords(True)
@@ -25,9 +28,11 @@ def transcribe_with_vosk(mp3_path: str) -> str:
             if not data:
                 break
             rec.AcceptWaveform(data)
-
         raw = json.loads(rec.FinalResult())
         return raw.get("text", "")
     finally:
         p.kill()
         p.wait()
+
+path_to_audio ="C:\\Users\\User\\AppData\\Local\\Temp\\tmpfl8ihj8q.webm"
+transcribe_with_vosk(path_to_audio)

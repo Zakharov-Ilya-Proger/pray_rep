@@ -27,6 +27,8 @@ jobs:
           echo "REQUEUE_ON_START=${{ secrets.REQUEUE_ON_START }}" >> .env
           echo "MODEL_PATH=${{ secrets.MODEL_PATH }}" >> .env
           echo "SAMPLE_RATE=${{ secrets.SAMPLE_RATE }}" >> .env
+          echo "API_RECORD_PASS=${{ secrets.API_RECORD_PASS }}" >> .env
+          echo "API_RECORD_URL=${{ secrets.API_RECORD_URL }}" >> .env
       - name: Build worker
         run: docker compose -p pray_worker build
 

@@ -15,3 +15,6 @@ def process(record_id: str) -> None:
                 remove(mp3_path)
             except Exception:
                 pass
+
+
+process("92740543")

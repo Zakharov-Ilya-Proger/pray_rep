@@ -67,7 +67,6 @@ while not stop:
             fail_and_requeue(record_id, str(e))
 
     except redis.ResponseError as e:
-        # если Redis старый и нет BLMOVE
         raise RuntimeError("Redis does not support BLMOVE (needs Redis 6.2+).") from e
     except Exception as e:
         print("ERROR:", e)

@@ -22,6 +22,8 @@ services:
       - REQUEUE_ON_START=${REQUEUE_ON_START}
       - MODEL_PATH=${MODEL_PATH}
       - SAMPLE_RATE=${SAMPLE_RATE}
+      - API_RECORD_PASS=${API_RECORD_PASS}
+      - API_RECORD_URL=${API_RECORD_URL}
     env_file:
       - .env
     restart: unless-stopped
