@@ -10,3 +10,4 @@ COPY . .
 EXPOSE 3004
 
 CMD ["uvicorn", "api.api:api", "--host", "0.0.0.0", "--port", "3004", "--workers", "1"]
+
