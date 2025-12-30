@@ -3,3 +3,10 @@ GET https://examples.http-client.intellij.net/get
     ?generated-in=PyCharm
 
 ###
+
+POST https://net.molitvamira.ru/add/redis
+Content-Type: application/json
+
+{
+  "id": "92740543"
+}
