@@ -20,5 +20,3 @@ def download_mp3(record_id: str) -> str:
             if chunk:
                 f.write(chunk)
     return path
-
-print(download_mp3("92740543"))

@@ -33,6 +33,3 @@ def transcribe_with_vosk(mp3_path: str) -> str:
     finally:
         p.kill()
         p.wait()
-
-path_to_audio ="C:\\Users\\User\\AppData\\Local\\Temp\\tmpfl8ihj8q.webm"
-transcribe_with_vosk(path_to_audio)
