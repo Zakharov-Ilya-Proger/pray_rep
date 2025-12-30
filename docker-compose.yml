@@ -16,8 +16,8 @@ services:
       - .env
     restart: unless-stopped
     networks:
-      - test_app_network
+      - pray_rep_app_network
 
 networks:
-  test_app_network:
+  pray_rep_app_network:
     external: true
