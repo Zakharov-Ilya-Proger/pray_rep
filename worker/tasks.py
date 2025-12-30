@@ -5,6 +5,7 @@ from os import path, remove
 
 def process(record_id: str) -> None:
     mp3_path = None
+    print(record_id)
     try:
         mp3_path = download_mp3(record_id)
         text = transcribe_with_vosk(mp3_path)
