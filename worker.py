@@ -3,19 +3,20 @@ import time
 import signal
 import redis
 
+from worker import settings
 from worker.tasks import process
 
-REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+REDIS_URL = settings.REDIS_URL
 
-QUEUE_KEY = os.getenv("QUEUE_KEY", "stt:queue")
-PROCESSING_KEY = os.getenv("PROCESSING_KEY", "stt:processing")
-DLQ_KEY = os.getenv("DLQ_KEY", "stt:dlq")
+QUEUE_KEY = settings.QUEUE_KEY
+PROCESSING_KEY = settings.PROCESSING_KEY
+DLQ_KEY = settings.DLQ_KEY
 
-BLOCK_SEC = int(os.getenv("BLOCK_SEC", "5"))
-MAX_ATTEMPTS = int(os.getenv("MAX_ATTEMPTS", "5"))
-ATTEMPTS_HASH = os.getenv("ATTEMPTS_HASH", "stt:attempts")
+BLOCK_SEC = settings.BLOCK_SEC
+MAX_ATTEMPTS = settings.MAX_ATTEMPTS
+ATTEMPTS_HASH = settings.ATTEMPTS_HASH
 
-REQUEUE_ON_START = os.getenv("REQUEUE_ON_START", "1") == "1"
+REQUEUE_ON_START = settings.REQUEUE_ON_START
 
 r = redis.Redis.from_url(REDIS_URL, decode_responses=True)
 stop = False
