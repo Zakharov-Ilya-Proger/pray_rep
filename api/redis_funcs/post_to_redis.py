@@ -17,7 +17,7 @@ async def post_to_redis(data):
         raise HTTPException(status_code=422, detail=f"JSON serialization error: {e}")
 
     try:
-        new_len = await redis_client.rpush(settings.QUEUE_KEY, payload)
+        new_len = await redis_client.rpush(settings.settings.QUEUE_KEY, payload)
         return int(new_len)
     except RedisError as e:
         raise HTTPException(status_code=503, detail=f"Redis error: {e}")
