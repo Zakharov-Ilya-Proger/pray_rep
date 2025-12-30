@@ -1,6 +1,6 @@
 from redis.asyncio import Redis
 
-redis_client: Redis = Redis(
-    host='redis-container',
-    port=6379,
-)
+from api.settings import settings
+
+redis = Redis()
+redis_client = redis.from_url(settings.REDIS)
