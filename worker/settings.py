@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     PROCESSING_KEY: str = getenv("PROCESSING_KEY", "stt:processing")
     DLQ_KEY: str = getenv("DLQ_KEY", "stt:dlq")
 
-    BLOCK_SEC: int = getenv("BLOCK_SEC", "5")
+    BLOCK_SEC: int = getenv("BLOCK_SEC", 5)
     MAX_ATTEMPTS: int = getenv("MAX_ATTEMPTS", "5")
     ATTEMPTS_HASH: str = getenv("ATTEMPTS_HASH", "stt:attempts")
 
