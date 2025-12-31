@@ -8,7 +8,7 @@ services:
     environment:
       REDIS_PASSWORD: password
       REDIS_USER: admin
-      REDIS_USER_PASSWORD: password
+      REDIS_USER_PASSWORD: hgiuhdfgipudhfidfug
     command: redis-server --requirepass password
     volumes:
       - redis_data:/data
