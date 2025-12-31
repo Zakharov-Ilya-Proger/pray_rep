@@ -6,10 +6,8 @@ services:
     ports:
       - "127.0.0.1:6379:6379"
     environment:
-      REDIS_PASSWORD: password
-      REDIS_USER: admin
       REDIS_USER_PASSWORD: hgiuhdfgipudhfidfug
-    command: redis-server --requirepass password
+    command: redis-server --requirepass hgiuhdfgipudhfidfug
     volumes:
       - redis_data:/data
     networks:
