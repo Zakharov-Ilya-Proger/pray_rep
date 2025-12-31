@@ -11,7 +11,7 @@ async def post_to_redis(req_id: str):
             return queue.enqueue(
                 "worker.jobs.process_request",
                 req_id,
-                retry=Retry(max=settings.settings.MAX_ATTEMPTS, interval=[1, 5, 15]),
+                retry=Retry(max=3, interval=[1, 5, 15]),
                 job_timeout=-1,
                 result_ttl=0,
                 failure_ttl=7 * 24 * 3600,
