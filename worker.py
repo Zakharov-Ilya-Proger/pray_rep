@@ -58,6 +58,7 @@ if REQUEUE_ON_START:
 while not stop:
     try:
         record_id = r.blmove(QUEUE_KEY, PROCESSING_KEY, src="LEFT", dest="RIGHT", timeout=BLOCK_SEC)
+        print(record_id)
         if record_id is None:
             continue
 
