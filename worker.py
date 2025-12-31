@@ -63,7 +63,7 @@ while not stop:
             continue
 
         try:
-            process(record_id)
+            process(record_id['id'])
             ack(record_id)
         except Exception as e:
             fail_and_requeue(record_id, str(e))
