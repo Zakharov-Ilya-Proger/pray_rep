@@ -1,23 +1,24 @@
-import json
-
+import anyio
 from fastapi import HTTPException
-from redis import RedisError
+from rq import Retry
 
+from api.redis_client import queue
 from api import settings
-from api.redis_client import redis_client
 
-
-async def post_to_redis(data):
-    if redis_client is None:
-        raise HTTPException(status_code=503, detail="Redis is not available")
-
+async def post_to_redis(req_id: str):
     try:
-        payload = json.dumps({"id": data.id}, ensure_ascii=False)
-    except (TypeError, ValueError) as e:
-        raise HTTPException(status_code=422, detail=f"JSON serialization error: {e}")
+        def _enqueue():
+            return queue.enqueue(
+                "worker.jobs.process_request",
+                req_id,
+                retry=Retry(max=settings.settings.MAX_ATTEMPTS, interval=[1, 5, 15]),
+                job_timeout=-1,
+                result_ttl=0,
+                failure_ttl=7 * 24 * 3600,
+            )
 
-    try:
-        new_len = await redis_client.rpush(settings.settings.QUEUE_KEY, payload)
-        return int(new_len)
-    except RedisError as e:
-        raise HTTPException(status_code=503, detail=f"Redis error: {e}")
+        job = await anyio.to_thread.run_sync(_enqueue)
+        return {"job_id": job.id}
+
+    except Exception as e:
+        raise HTTPException(status_code=503, detail=f"Queue error: {e}")

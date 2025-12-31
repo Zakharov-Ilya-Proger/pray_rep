@@ -19,7 +19,7 @@ router = APIRouter(
     }
 )
 async def post_audio(request: reqModel):
-    res = await post_to_redis(request)
+    res = await post_to_redis(request.id)
     if not isinstance(res, HTTPException):
-        return {"ok": True, "queue": settings.QUEUE_KEY, "new_length": res}
+        return {"ok": True, "queue": settings.QUEUE_KEY, "job_id": res}
     raise res

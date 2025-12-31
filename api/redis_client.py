@@ -1,6 +1,7 @@
-from redis.asyncio import Redis
+from redis import Redis
+from rq import Queue
 
-from api.settings import settings
+from api import settings
 
-redis = Redis()
-redis_client = redis.from_url(settings.REDIS)
+redis_conn = Redis.from_url(settings.settings.REDIS)
+queue = Queue(name=settings.settings.QUEUE_KEY, connection=redis_conn)
