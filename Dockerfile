@@ -12,4 +12,4 @@ RUN apt-get update \
 
 COPY . .
 
-CMD sh -c 'rq worker -u "$REDIS_URL" "$QUEUE_NAME"'
+CMD sh -c 'rq worker -u "$REDIS_URL" "$QUEUE_KEY"'
