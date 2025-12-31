@@ -1,8 +1,9 @@
 import json
 import subprocess
 
-from worker import settings
-from worker.model.init_model import rec
+from vosk import KaldiRecognizer
+
+from worker import settings, model
 
 
 def transcribe_with_vosk(mp3_path: str) -> str:
@@ -17,6 +18,7 @@ def transcribe_with_vosk(mp3_path: str) -> str:
         "-f", "s16le",
         "pipe:1"
     ]
+    rec = KaldiRecognizer(model, 16000)
 
     rec.SetWords(True)
 
