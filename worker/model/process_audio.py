@@ -3,7 +3,8 @@ import subprocess
 
 from vosk import KaldiRecognizer
 
-from worker import settings, model
+from worker import settings
+from worker.model.init_model import model
 
 
 def transcribe_with_vosk(mp3_path: str) -> str:
