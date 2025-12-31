@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException
 
 from api.models.reqModel import reqModel
 from api.redis_funcs.post_to_redis import post_to_redis
+from api.settings import settings
 
 router = APIRouter(
     tags=['Post Audio'],
@@ -20,5 +21,5 @@ router = APIRouter(
 async def post_audio(request: reqModel):
     res = await post_to_redis(request)
     if not isinstance(res, HTTPException):
-        return {"ok": True, "queue": "settings.QUEUE_KEY", "new_length": res}
+        return {"ok": True, "queue": settings.QUEUE_KEY, "new_length": res}
     raise res
