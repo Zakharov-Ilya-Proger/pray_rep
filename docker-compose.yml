@@ -13,13 +13,10 @@ services:
     volumes:
       - redis_data:/data
     networks:
-      pray_rep_app_network:
-        aliases:
-          - redis-container
-
+      - pray_rep_app_network
 volumes:
   redis_data:
     driver: local
 networks:
   pray_rep_app_network:
-    external: true
+    driver: bridge
