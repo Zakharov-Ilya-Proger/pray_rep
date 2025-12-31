@@ -8,14 +8,10 @@ services:
     volumes:
       - /home/oleg/vosk-model-ru-0.42:/models/vosk-model-ru-0.42:ro
     container_name: worker-container
-    ports:
-      - "127.0.0.1:3005:3005"
     environment:
       - WORKERS=${WORKERS}
       - QUEUE_KEY=${QUEUE_KEY}
       - REDIS_URL=${REDIS_URL}
-      - PROCESSING_KEY=${PROCESSING_KEY}
-      - DLQ_KEY=${DLQ_KEY}
       - BLOCK_SEC=${BLOCK_SEC}
       - MAX_ATTEMPTS=${MAX_ATTEMPTS}
       - ATTEMPTS_HASH=${ATTEMPTS_HASH}

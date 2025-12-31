@@ -12,6 +12,4 @@ RUN apt-get update \
 
 COPY . .
 
-EXPOSE 3005
-
-CMD ["python", "worker.py"]
+CMD sh -c 'rq worker -u "$REDIS_URL" "$QUEUE_NAME"'
