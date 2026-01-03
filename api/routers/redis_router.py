@@ -21,7 +21,9 @@ router = APIRouter(
     }
 )
 async def post_audio(request: reqModel):
-    auth = await check_password(request.api_pass, settings.API_PASS)
+    auth = await check_password(request.api_pass)
+    if not auth:
+        raise HTTPException(401)
     res = await post_to_redis(request.id)
     if not isinstance(res, HTTPException):
         return {"ok": True, "queue": settings.QUEUE_KEY, "job_id": res}
