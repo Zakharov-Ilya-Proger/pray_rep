@@ -18,7 +18,10 @@ router = APIRouter(
         409: {"description": "Key already exists"},
         422: {"description": "Unprocessable Entity"},
         500: {"description": "Internal Server Error"},
-    }
+    },
+    description='''
+    Adding to Redis Queue endpoint. Worker will take the job from queue, load audio n process it 
+    '''
 )
 async def post_audio(request: reqModel):
     auth = await check_password(request.api_pass)

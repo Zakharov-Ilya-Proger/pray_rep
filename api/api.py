@@ -11,4 +11,4 @@ api.add_middleware(
     allow_headers=["*"]
 )
 
-api.include_router(router, prefix="/add")
+api.include_router(router, prefix="/add", tags=["Process pray record"])
