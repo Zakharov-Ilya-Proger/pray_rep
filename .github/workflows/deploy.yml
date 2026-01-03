@@ -21,7 +21,7 @@ jobs:
           echo "REDIS=${{ secrets.REDIS }}" >> .env
           echo "WORKERS=${{ secrets.WORKERS }}" >> .env
           echo "QUEUE_KEY=${{ secrets.QUEUE_KEY }}" >> .env
-          echo "API_PASS=${{ secrets.API_PASS }}" >> runtime.env
+          echo "API_PASS=${{ secrets.API_PASS }}" | sed 's/\$/$$/g' >> .env
       - name: Build Redis
         run: docker compose -p pray_api build
 
