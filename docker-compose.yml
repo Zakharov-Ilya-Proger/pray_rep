@@ -12,6 +12,7 @@ services:
       - REDIS=${REDIS}
       - WORKERS=${WORKERS}
       - QUEUE_KEY=${QUEUE_KEY}
+      - API_PASS=${API_PASS}
     env_file:
       - .env
     restart: unless-stopped
