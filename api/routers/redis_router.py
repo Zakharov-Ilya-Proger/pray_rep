@@ -6,7 +6,6 @@ from api.settings import settings
 from api.api_pass import check_password
 
 router = APIRouter(
-    tags=['Post Audio'],
 )
 
 @router.post(
