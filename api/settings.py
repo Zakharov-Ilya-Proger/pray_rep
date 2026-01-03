@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     WORKERS: int = getenv("WORKERS")
     QUEUE_KEY: str = getenv("QUEUE_KEY")
     PORT: int = getenv("PORT")
+    API_PASS: str = getenv("API_PASS")
 
     class Config:
         env_file = ".env"

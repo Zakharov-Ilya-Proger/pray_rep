@@ -3,7 +3,6 @@ from starlette.middleware.cors import CORSMiddleware
 
 from api.routers import router
 
-
 api = FastAPI()
 
 api.add_middleware(
