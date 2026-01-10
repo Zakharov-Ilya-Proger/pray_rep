@@ -1,4 +1,17 @@
+from requests import post
+
 
 def post_data(record_id, data):
-    print(f'Id: {record_id}\nТекст: {data}')
-    pass
+    response = post(
+        url='https://molitvamira.ru/api/',
+        data={
+            "type": "transcribation",
+            "pass": "f92R*#eiDF82W@#k2WO",
+            "method": "reportSaveTextTranslation",
+            "data": {
+                "roomID": int(record_id),
+                "text": data
+            }
+        }
+    )
+    return response
