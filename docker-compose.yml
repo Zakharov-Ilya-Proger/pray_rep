@@ -6,17 +6,13 @@ services:
       context: .
       network: host
     volumes:
-      - /home/oleg/vosk-model-ru-0.42:/models/vosk-model-ru-0.42:ro
+      - ${MODEL_PATH}:/models/vosk-model-ru-0.42:ro
     container_name: worker-container
     environment:
       - WORKERS=${WORKERS}
       - QUEUE_KEY=${QUEUE_KEY}
       - REDIS_URL=${REDIS_URL}
-      - BLOCK_SEC=${BLOCK_SEC}
-      - MAX_ATTEMPTS=${MAX_ATTEMPTS}
-      - ATTEMPTS_HASH=${ATTEMPTS_HASH}
-      - REQUEUE_ON_START=${REQUEUE_ON_START}
-      - MODEL_PATH=${MODEL_PATH}
+      - MODEL_PATH=/models/vosk-model-ru-0.42
       - SAMPLE_RATE=${SAMPLE_RATE}
       - API_RECORD_PASS=${API_RECORD_PASS}
       - API_RECORD_URL=${API_RECORD_URL}
