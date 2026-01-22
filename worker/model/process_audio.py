@@ -13,7 +13,7 @@ def transcribe_with_vosk(mp3_path: str) -> str:
         "-vn",
         "-map", "0:a:0",
         "-acodec", "pcm_s16le",
-        "-ar", 16000,
+        "-ar", "16000",
         "-ac", "1",
         "-f", "s16le",
         "pipe:1"
