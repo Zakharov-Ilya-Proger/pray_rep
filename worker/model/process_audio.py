@@ -3,7 +3,6 @@ import subprocess
 
 from vosk import KaldiRecognizer
 
-from worker import settings
 from worker.model.init_model import model
 
 
@@ -21,13 +20,14 @@ def transcribe_with_vosk(mp3_path: str) -> str:
     ]
     rec = KaldiRecognizer(model, 16000)
 
-    rec.SetWords(True)
+    rec.SetWords(False)
 
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
     try:
+        CHUNK = 32000 * 2
         assert p.stdout is not None
         while True:
-            data = p.stdout.read(4000)
+            data = p.stdout.read(CHUNK)
             if not data:
                 break
             rec.AcceptWaveform(data)
