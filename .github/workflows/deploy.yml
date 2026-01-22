@@ -19,14 +19,7 @@ jobs:
         run: |
           echo "REDIS_URL=${{ secrets.REDIS }}" >> .env
           echo "QUEUE_KEY=${{ secrets.QUEUE_KEY }}" >> .env
-          echo "PROCESSING_KEY=${{ secrets.PROCESSING_KEY }}" >> .env
-          echo "DLQ_KEY=${{ secrets.DLQ_KEY }}" >> .env
-          echo "BLOCK_SEC=${{ secrets.BLOCK_SEC }}" >> .env
-          echo "MAX_ATTEMPTS=${{ secrets.MAX_ATTEMPTS }}" >> .env
-          echo "ATTEMPTS_HASH=${{ secrets.ATTEMPTS_HASH }}" >> .env
-          echo "REQUEUE_ON_START=${{ secrets.REQUEUE_ON_START }}" >> .env
           echo "MODEL_PATH=${{ secrets.MODEL_PATH }}" >> .env
-          echo "SAMPLE_RATE=${{ secrets.SAMPLE_RATE }}" >> .env
           echo "API_RECORD_PASS=${{ secrets.API_RECORD_PASS }}" >> .env
           echo "API_RECORD_URL=${{ secrets.API_RECORD_URL }}" >> .env
       - name: Build worker

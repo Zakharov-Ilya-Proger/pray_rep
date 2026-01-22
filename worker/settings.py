@@ -8,7 +8,6 @@ class Settings(BaseSettings):
     REDIS_URL: str = getenv("REDIS_URL", "redis://localh:6379/0")
 
     QUEUE_KEY: str = getenv("QUEUE_KEY", "stt:queue")
-    PROCESSING_KEY: str = getenv("PROCESSING_KEY", "stt:processing")
 
     MODEL_PATH: str = getenv("MODEL_PATH")
 
