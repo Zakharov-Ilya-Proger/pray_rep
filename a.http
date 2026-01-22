@@ -1,0 +1,152 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=PyCharm
+
+;REDIS_URL=redis://:hgiuhdfgipudhfidfug@redis-container:6379/0
+QUEUE_KEY=stt:queue
+; PROCESSING_KEY=stt:processing
+; DLQ_KEY= stt:dlq
+; BLOCK_SEC=5
+; MAX_ATTEMPTS=5
+; ATTEMPTS_HASH= stt:attempts
+; REQUEUE_ON_START=1
+; MODEL_PATH=MODEL_PATH
+; SAMPLE_RATE=16000
+; API_RECORD_PASS=CxF6G1B4CMEuogRG
+; API_RECORD_URL=https://media.molitvamira.ru/getRecord
+API_PASS=$2b$10$mSXNp6D0PbLp3vCFeWrReuMucVU7DA1k5rYYJ9j7KCNEMehnM.826
+REDIS=redis://:hgiuhdfgipudhfidfug@redis-container:6379/0
+WORKERS=10
+PORT=8080
+
+###
+
+POST https://net.molitvamira.ru/add/redis
+Content-Type: application/json
+X-API-Key: klsdjfghsadfkjghnskdjfghndsfouigh
+
+{
+  "id": "92740543"
+}
+
+###
+
+POST localhost:3004/add/redis
+Content-Type: application/json
+X-API-Key: klsdjfghsadfkjghnskdjfghndsfouigh
+
+{
+  "id": "92740543"
+}
+
+###
+
+POST https://molitvamira.ru/api/
+Content-Type: application/json
+
+{
+  "type": "application",
+  "pass": "f92R*#eiDF82W@#k2WO",
+  "method": "appLoginAccount",
+  "data": {
+    "email": "info@imjustsuper.online",
+    "password": "123123"
+  }
+}
+
+
+###
+POST https://molitvamira.ru/api/
+Content-Type: application/json
+
+{
+  "type": "application",
+  "pass": "f92R*#eiDF82W@#k2WO",
+  "method": "getDioceses",
+  "data": { }
+}
+
+###
+
+POST https://molitvamira.ru/api/
+Content-Type: application/json
+
+{
+  "type": "application",
+  "pass": "f92R*#eiDF82W@#k2WO",
+  "method": "appGetUserData",
+  "data": {
+	"user_id": 30
+  }
+}
+
+###
+
+POST https://molitvamira.ru/api/
+Content-Type: application/json
+
+{
+  "type": "application",
+  "pass": "f92R*#eiDF82W@#k2WO",
+  "method": "appGetTranslations",
+  "data": {
+	}
+}
+
+###
+
+POST https://molitvamira.ru/api/
+Content-Type: application/json
+
+{
+  "type": "application",
+  "pass": "f92R*#eiDF82W@#k2WO",
+  "method": "appGetPrayersCategory",
+  "data": {
+	}
+}
+
+###
+
+POST https://molitvamira.ru/api/
+Content-Type: application/json
+
+{
+  "type": "application",
+  "pass": "f92R*#eiDF82W@#k2WO",
+  "method": "appGetTranslations",
+  "data": {
+	"user_id" : 48
+  }
+}
+
+###
+
+POST https://molitvamira.ru/api/
+Content-Type: application/json
+
+{
+  "type": "application",
+  "pass": "f92R*#eiDF82W@#k2WO",
+  "method": "appGetTranslations",
+  "data": {
+    "translation_id" : 70
+  }
+}
+
+###
+
+POST https://molitvamira.ru/api/
+Content-Type: application/json
+
+{
+  "type": "application",
+  "pass": "f92R*#eiDF82W@#k2WO",
+  "method": "appGetTranslations",
+  "data": { 
+	"type": "completed",
+    "from": 1,
+	"limit": 100,
+    "user_id": 48
+  }
+}

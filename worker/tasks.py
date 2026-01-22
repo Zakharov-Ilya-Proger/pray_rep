@@ -9,7 +9,8 @@ def process(record_id: str) -> None:
     try:
         mp3_path = download_mp3(record_id)
         text = transcribe_with_vosk(mp3_path)
-        post_data(record_id, text)
+        response = post_data(record_id, text)
+        print(response.status_code)
     finally:
         if mp3_path and path.exists(mp3_path):
             try:

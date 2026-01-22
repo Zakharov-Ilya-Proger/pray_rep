@@ -20,3 +20,6 @@ def download_mp3(record_id: str) -> str:
             if chunk:
                 f.write(chunk)
     return path
+
+if __name__ == '__main__':
+    print(download_mp3("3297907162"))
