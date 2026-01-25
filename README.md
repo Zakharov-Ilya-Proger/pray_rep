@@ -1,42 +1,69 @@
 # Сервис очереди Redis
 
-## 1 Скачать код с Git и перейти на ветку Redis
+## 1 Скачать код с Git и перейти на ветку Worker
 ```bash
 git clone git@github.com:Zakharov-Ilya-Proger/pray_rep.git
 cd pray_rep
 
 git fetch --all
-git checkout redis-prod
+git checkout worker-prod
+
 ```
 ## 2 Установка Docker на сервере
 
 Для установки и запуска системы docker а сервер перейдите по [ссылке](https://docs.docker.com/engine/install/) и настройте.
 
-Минимально проверьте, что всё ок:
+## 3 Скачать Vosk-модель и запомнить путь
 
-docker --version
-docker compose version
+Скачайте модель Vosk и распакуйте на сервере. В README у вас пример пути:
+```
+/home/usr_nm/vosk_model_dir
+```
+## 4 Переменные окружения (.env)
 
-## 3 Настройка переменных окружения (рекомендуется)
-
-Сейчас пароль Redis захардкожен в docker-compose.yml (и в command --requirepass ...). 
-
-В десятой строке указывается пароль дял доступа к Redis из вне
-
-*Важно:* в текущем compose также создаётся сеть pray_rep_app_network.
-
-Эта сеть должна быть общей для остальных сервисов.
-
-## 4 Сборка и запуск Redis (сначала всегда Redis!)
-
-В вашем README сейчас команда указана с опечаткой up -b. Должно быть -d (detach). 
+Сервису нужны следующие переменные окружения: 
 
 ```bash
-sudo docker compose up -d
+WORKERS=2
+QUEUE_KEY=audio_queue
+REDIS_URL=redis://:<REDIS_PASSWORD>@redis-container:6379/0
+MODEL_PATH=/home/usr_nm/vosk_model_dir
+API_RECORD_PASS=change_me
+API_RECORD_URL=http://<media-server-host>:<port>
+
+```
+Примечание по REDIS_URL: если Redis поднят в той же docker-сети, то хост можно указывать как имя контейнера Redis (у вас redis-container). 
+
+## 5 Сборка и запуск (Redis должен уже работать)
+
+_Убедитесь, что сервис Redis уже работает._
+
+Так же проверьте какую сеть создал контейнер Redis
+
+```bash
+docker inspect --format='{{.NetworkSettings.Networks}}' redis-container
+```
+Приблизительный вывод
+
+```
+map[pray_rep_pray_rep_app_network:0xc00031e5a0]
 ```
 
-Проверка:
+Важно проверить, чтобы во всех полях с network было указано выведенное название
+
+```
+pray_rep_pray_rep_app_network
+```
+
+Важно про сеть: worker-сервис должен подключаться к той же сети pray_rep_app_network. Если у вас отдельный docker-compose.yml в worker-ветке — обычно сеть делают external: true и подключают сервис к ней:
+
 ```bash
-docker ps
-docker network ls | grep pray_rep_app_network
+networks:
+  pray_rep_app_network:
+    external: true
+```
+
+Дальше:
+```bash
+sudo docker compose up -d
 ```
