@@ -1,4 +1,4 @@
-# Сервис очереди Redis
+# Сервис Redis Queue Worker
 
 ## 1 Скачать код с Git и перейти на ветку Worker
 ```bash
