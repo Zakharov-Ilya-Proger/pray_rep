@@ -3,6 +3,11 @@
 ## 1. Настройка и установка Docker
 
 Для установки и запуска системы docker а сервер перейдите по [ссылке](https://docs.docker.com/engine/install/) и настройте.
+Минимально проверьте, что всё ок:
+```bash
+docker --version
+docker compose version
+```
 
 ## 2. Скачайте модель
 
