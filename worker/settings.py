@@ -1,3 +1,4 @@
+from pydantic import ConfigDict
 from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 from os import getenv
@@ -5,7 +6,7 @@ from os import getenv
 load_dotenv()
 
 class Settings(BaseSettings):
-    REDIS_URL: str = getenv("REDIS_URL", "redis://localh:6379/0")
+    REDIS: str = getenv("REDIS", "redis://localh:6379/0")
 
     QUEUE_KEY: str = getenv("QUEUE_KEY", "stt:queue")
 
@@ -13,6 +14,8 @@ class Settings(BaseSettings):
 
     API_RECORD_PASS: str = getenv("API_RECORD_PASS", "0")
     API_RECORD_URL: str = getenv("API_RECORD_URL", "0")
+
+    model_config = ConfigDict(extra="allow")
 
     class Config:
         env_file = ".env"
