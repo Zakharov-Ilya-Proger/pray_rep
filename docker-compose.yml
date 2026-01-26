@@ -13,7 +13,6 @@ services:
       - QUEUE_KEY=${QUEUE_KEY}
       - REDIS=${REDIS}
       - MODEL_PATH=/models/vosk-model-ru-0.42
-      - SAMPLE_RATE=${SAMPLE_RATE}
       - API_RECORD_PASS=${API_RECORD_PASS}
       - API_RECORD_URL=${API_RECORD_URL}
     env_file:
