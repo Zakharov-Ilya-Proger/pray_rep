@@ -1,4 +1,3 @@
-from pydantic import ConfigDict
 from pydantic_settings import BaseSettings
 from os import getenv
 from dotenv import load_dotenv
