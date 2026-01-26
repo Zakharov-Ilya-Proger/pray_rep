@@ -1,4 +1,3 @@
-from pydantic import ConfigDict
 from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 from os import getenv
@@ -15,10 +14,9 @@ class Settings(BaseSettings):
     API_RECORD_PASS: str = getenv("API_RECORD_PASS", "0")
     API_RECORD_URL: str = getenv("API_RECORD_URL", "0")
 
-    model_config = ConfigDict(extra="allow")
-
     class Config:
         env_file = ".env"
+        extra = "ignore"
 
 settings = Settings()
     
