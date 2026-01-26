@@ -13,7 +13,7 @@ services:
       - WORKERS=${WORKERS}
       - QUEUE_KEY=${QUEUE_KEY}
       - API_PASS=${API_PASS}
-      - PORT
+      - PORT=${PORT}
     env_file:
       - .env
     restart: unless-stopped
