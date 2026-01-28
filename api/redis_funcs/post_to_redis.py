@@ -5,12 +5,13 @@ from rq import Retry
 from api.redis_client import queue
 from api import settings
 
-async def post_to_redis(req_id: str):
+async def post_to_redis(req_id: str, hash: str):
     try:
         def _enqueue():
             return queue.enqueue(
                 "worker.jobs.process_request",
                 req_id,
+                hash,
                 retry=Retry(max=3, interval=[1, 5, 15]),
                 job_timeout=-1,
                 result_ttl=0,

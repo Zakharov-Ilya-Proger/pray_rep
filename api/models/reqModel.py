@@ -7,3 +7,8 @@ class reqModel(BaseModel):
         description='''Room id, to load audio''',
         examples=['КАКИЕТАЦИФАРАКИ']
     )
+    hash: str = Field(
+        ...,
+        description='''Audio hash, to load audio''',
+        examples=['КАКОЙТОHASH']
+    )

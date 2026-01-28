@@ -61,7 +61,7 @@ async def post_audio(request: reqModel, key: str = Depends(api_key_header)):
     auth = await check_password(key)
     if not auth:
         raise HTTPException(401)
-    res = await post_to_redis(request.id)
+    res = await post_to_redis(request.id, request.hash)
     if not isinstance(res, HTTPException):
         return {"ok": True, "queue": settings.QUEUE_KEY, "job_id": res}
     raise res
