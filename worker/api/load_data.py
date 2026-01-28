@@ -6,20 +6,10 @@ from os import close
 from worker import settings
 
 
-def download_mp3(record_id: str) -> str:
+def download_mp3(hash: str) -> str:
     url = settings.API_RECORD_URL
 
-    resp = requests.post(
-        url,
-        json={
-            "pass": settings.API_RECORD_PASS,
-            "roomID": int(record_id)
-        },
-        stream=True,
-        timeout=(
-            5, 120
-        )
-    )
+    resp = requests.get(url+f'/{hash}', stream=True)
     resp.raise_for_status()
 
     fd, path = tempfile.mkstemp(suffix=".webm")
@@ -33,4 +23,4 @@ def download_mp3(record_id: str) -> str:
 
 
 if __name__ == '__main__':
-    print(download_mp3("92740543"))
+    print(download_mp3("1767103126"))

@@ -150,3 +150,12 @@ Content-Type: application/json
     "user_id": 48
   }
 }
+
+###
+
+POST https://media.molitvamira.ru/getRecordsList
+Content-Type: application/json
+
+{
+  "pass": "F1ujDEHHq3kc7SMP"
+}

@@ -5,11 +5,11 @@ from worker.model import transcribe_with_vosk
 from os import path, remove
 
 
-def process(record_id: str) -> None:
+def process(record_id: str, hash: str) -> None:
     mp3_path = None
     print(record_id)
     try:
-        mp3_path = download_mp3(record_id)
+        mp3_path = download_mp3(hash)
         now = datetime.datetime.now()
         text = transcribe_with_vosk(mp3_path)
         then = datetime.datetime.now()
