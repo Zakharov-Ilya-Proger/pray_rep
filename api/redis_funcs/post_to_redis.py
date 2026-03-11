@@ -10,8 +10,10 @@ async def post_to_redis(req_id: str, hash: str):
         def _enqueue():
             return queue.enqueue(
                 "worker.jobs.process_request",
-                req_id,
-                hash,
+                {
+                    "req_id": req_id,
+                    "hash": hash
+                },
                 retry=Retry(max=3, interval=[1, 5, 15]),
                 job_timeout=-1,
                 result_ttl=0,
