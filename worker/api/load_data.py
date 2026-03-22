@@ -1,20 +1,20 @@
 import tempfile
-
-import requests
 from os import close
+import requests
 
-from worker import settings
+from worker.settings import settings
 
 
 def download_mp3(hash: str) -> str:
-    url = settings.API_RECORD_URL +f'/{hash}'
+    url = settings.API_RECORD_URL + f'/{hash}'
+
     with requests.Session() as session:
-        with session.get(url, stream=True) as resp:
+        with session.get(url, stream=True, timeout=settings.REQUEST_TIMEOUT) as resp:
             resp.raise_for_status()
 
             fd, temp_path = tempfile.mkstemp(
                 suffix=".webm",
-                dir='prays',
+                dir="/tmp",
             )
             close(fd)
 
@@ -24,7 +24,6 @@ def download_mp3(hash: str) -> str:
                         f.write(chunk)
 
     return temp_path
-
 
 if __name__ == '__main__':
     print(download_mp3("1767103126"))
