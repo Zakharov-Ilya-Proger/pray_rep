@@ -9,7 +9,7 @@ def download_mp3(hash: str) -> str:
     url = settings.API_RECORD_URL + f'/{hash}'
 
     with requests.Session() as session:
-        with session.get(url, stream=True, timeout=settings.REQUEST_TIMEOUT) as resp:
+        with session.get(url, stream=True) as resp:
             resp.raise_for_status()
 
             fd, temp_path = tempfile.mkstemp(
