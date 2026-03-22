@@ -8,7 +8,10 @@ from worker.model.init_model import model
 
 def transcribe_with_vosk(mp3_path: str) -> str:
     cmd = [
-        "ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error",
+        "ffmpeg",
+        "-nostdin",
+        "-hide_banner",
+        "-loglevel", "error",
         "-i", mp3_path,
         "-vn",
         "-map", "0:a:0",
@@ -16,23 +19,34 @@ def transcribe_with_vosk(mp3_path: str) -> str:
         "-ar", "16000",
         "-ac", "1",
         "-f", "s16le",
-        "pipe:1"
+        "pipe:1",
     ]
+
     rec = KaldiRecognizer(model, 16000)
-
     rec.SetWords(False)
+    rec.SetPartialWords(False)
+    rec.SetMaxAlternatives(0)
 
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+    p = subprocess.Popen(
+        cmd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        bufsize=10**6,
+    )
+
     try:
-        CHUNK = 32000 * 2
+        chunk_size = 65536
+
         assert p.stdout is not None
+
         while True:
-            data = p.stdout.read(CHUNK)
+            data = p.stdout.read(chunk_size)
             if not data:
                 break
             rec.AcceptWaveform(data)
-        raw = json.loads(rec.FinalResult())
-        return raw.get("text", "")
+
+        return json.loads(rec.FinalResult()).get("text", "")
     finally:
-        p.kill()
+        if p.poll() is None:
+            p.kill()
         p.wait()

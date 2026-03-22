@@ -7,19 +7,23 @@ from worker import settings
 
 
 def download_mp3(hash: str) -> str:
-    url = settings.API_RECORD_URL
+    url = settings.API_RECORD_URL +f'/{hash}'
+    with requests.Session() as session:
+        with session.get(url, stream=True, timeout=settings.REQUEST_TIMEOUT) as resp:
+            resp.raise_for_status()
 
-    resp = requests.get(url+f'/{hash}', stream=True)
-    resp.raise_for_status()
+            fd, temp_path = tempfile.mkstemp(
+                suffix=".webm",
+                dir=settings.DOWNLOAD_DIR,
+            )
+            close(fd)
 
-    fd, path = tempfile.mkstemp(suffix=".webm")
-    close(fd)
+            with open(temp_path, "wb") as f:
+                for chunk in resp.iter_content(chunk_size=1024 * 1024):
+                    if chunk:
+                        f.write(chunk)
 
-    with open(path, "wb") as f:
-        for chunk in resp.iter_content(chunk_size=1024 * 256):
-            if chunk:
-                f.write(chunk)
-    return path
+    return temp_path
 
 
 if __name__ == '__main__':

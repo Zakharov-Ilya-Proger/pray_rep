@@ -12,4 +12,4 @@ RUN apt-get update \
 
 COPY . .
 
-CMD sh -c 'rq worker -u "$REDIS" "$QUEUE_KEY"'
+CMD ["python", "-m", "worker.run"]

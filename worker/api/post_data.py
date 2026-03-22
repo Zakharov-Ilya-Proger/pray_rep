@@ -18,12 +18,12 @@ def post_data(record_id, data):
         data=payload,
         headers={'Content-Type': 'application/json'}
     )
+    print(resp.status_code)
+    print(resp.text)
     return resp
 
 
 
 if __name__ == '__main__':
-    response = post_data(167137869, "Ghfjdgeorij foiawfhaoisf foaisfhiok")
-    print(response.status_code)
-    print(response.text)
+    response = post_data(1238437720, "Ghfjdgeorij foiawfhaoisf foaisfhiok")
 

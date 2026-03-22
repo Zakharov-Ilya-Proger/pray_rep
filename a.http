@@ -102,9 +102,13 @@ Content-Type: application/json
 {
   "type": "application",
   "pass": "f92R*#eiDF82W@#k2WO",
-  "method": "appGetPrayersCategory",
+  "method": "appGetGroups",
   "data": {
-	}
+	"user_id": 0,
+	"my_user_id": 30,
+	"page": 1,
+	"limit": 100
+  }
 }
 
 ###
@@ -129,9 +133,10 @@ Content-Type: application/json
 {
   "type": "application",
   "pass": "f92R*#eiDF82W@#k2WO",
-  "method": "appGetTranslations",
+  "method": "appUserOnlineInTranslation",
   "data": {
-    "translation_id" : 70
+    "translation_id" : 306,
+    "user_id": 30
   }
 }
 
@@ -145,10 +150,9 @@ Content-Type: application/json
   "pass": "f92R*#eiDF82W@#k2WO",
   "method": "appGetTranslations",
   "data": { 
-	"type": "completed",
+	"type": "active",
     "from": 1,
-	"limit": 100,
-    "user_id": 48
+	"limit": 100
   }
 }
 
@@ -159,4 +163,45 @@ Content-Type: application/json
 
 {
   "pass": "F1ujDEHHq3kc7SMP"
+}
+
+
+###
+
+POST https://net.molitvamira.ru/add/redis
+Content-Type: application/json
+X-API-Key: klsdjfghsadfkjghnskdjfghndsfouigh
+
+{
+  "id": "464821470",
+  "hash": "de9cb41b9adc8e1a3dd89b18887c9741-651f4682d0068f36-803cb6a21ad14702"
+}
+
+###
+
+POST https://molitvamira.ru/api/
+Content-Type: application/json
+
+{
+  "type": "application",
+  "pass": "f92R*#eiDF82W@#k2WO",
+  "method": "appGetChatMessagesSupport",
+  "data": {
+	"user_id": 30
+  }
+}
+
+###
+
+POST https://molitvamira.ru/api/
+Content-Type: application/json
+
+{
+  "type": "application",
+  "pass": "f92R*#eiDF82W@#k2WO",
+  "method": "appStartChatAutoUpdateSupport",
+  "data": {
+    "user_id": 30,
+    "lastMessageId": 14
+  }
 }
