@@ -14,7 +14,7 @@ def download_mp3(hash: str) -> str:
 
             fd, temp_path = tempfile.mkstemp(
                 suffix=".webm",
-                dir=settings.DOWNLOAD_DIR,
+                dir='prays',
             )
             close(fd)
 
