@@ -3,7 +3,6 @@ from fastapi import HTTPException
 from rq import Retry
 
 from api.redis_client import queue
-from api import settings
 
 async def post_to_redis(req_id: str, hash: str):
     try:
