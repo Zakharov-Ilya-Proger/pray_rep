@@ -2,11 +2,13 @@ import json
 
 from requests import post
 
+from worker import settings
+
 
 def post_data(record_id, data):
     payload = json.dumps({
         "type": "transcribation",
-        "pass": "s1Wu4Ot(#@rF8@w2R",
+        "pass": settings.API_PHP_PASS,
         "method": "reportSaveMediaTranscribation",
         "data": {
             "roomID": int(record_id),
@@ -14,7 +16,7 @@ def post_data(record_id, data):
         }
     })
     resp = post(
-        url='https://molitvamira.ru/api/',
+        url=settings.API_PHP_URL,
         data=payload,
         headers={'Content-Type': 'application/json'}
     )

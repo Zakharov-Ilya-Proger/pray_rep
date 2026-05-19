@@ -14,6 +14,9 @@ class Settings(BaseSettings):
     API_RECORD_PASS: str = getenv("API_RECORD_PASS", "0")
     API_RECORD_URL: str = getenv("API_RECORD_URL", "0")
 
+    API_PHP_URL: str = getenv("API_PHP_URL", "0")
+    API_PHP_PASS: str = getenv("API_PHP_PASS", "0")
+
     class Config:
         env_file = ".env"
         extra = "ignore"
